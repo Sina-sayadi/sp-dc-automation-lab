@@ -47,3 +47,10 @@ This project demonstrates a full end-to-end network design covering:
   - Automatic reaction when a port goes down (BGP session management)
 
 ## Repository Structure
+- `/diagrams` → Network topology
+- `/configs` → Router configurations
+- `/scripts` → Python automation scripts
+- `/eem` → EEM applets
+
+## Technologies
+Cisco IOS, OSPF, BGP, DMVPN, Python (Netmiko), EEM, SSH
