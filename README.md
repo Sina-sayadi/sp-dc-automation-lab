@@ -104,10 +104,13 @@ Confederation Identifier:
 
 Member ASs:
 
-Member AS	Components
-65501	Edge-1, Edge-2
-65502	Backbone-1, Backbone-2, IXP, Spine-1, Spine-2, Leaf-1, Leaf-2, Leaf-3
-65503	Broadband-1, Broadband-2, Site-1, POP-Site-1
+Member AS	-- Components
+
+65501 	Edge-1, Edge-2
+
+65502 	Backbone-1, Backbone-2, IXP, Spine-1, Spine-2, Leaf-1, Leaf-2, Leaf-3
+
+65503 	Broadband-1, Broadband-2, Site-1, POP-Site-1
 
 The routing hierarchy is designed as:
 
@@ -176,7 +179,7 @@ The following BGP attributes are used:
 * Origin
 * AS-Path Prepending
 
-These policies determine the preferred outbound Internet path while also influencing inbound traffic from upstream providers.
+These policies determine the preferred outbound Internet path while also influencing inbound traffic,outbound trafcic from upstream providers.
 
 ⸻
 
@@ -190,7 +193,7 @@ Inside AS65503, Broadband routers implement:
 
 Local Preference defines the preferred Broadband router for outbound traffic.
 
-Weight and AS-Path Prepending influence return traffic from upstream networks.
+Weight and AS-Path Prepending influence send and return traffic from upstream networks.
 
 ⸻
 
@@ -257,7 +260,7 @@ spine
 
 ↓
 
-Core
+Core(broadband-1)
 
 ↓
 
