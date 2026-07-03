@@ -1,0 +1,33 @@
+```
+leaf-2#sho bgp
+BGP table version is 5, local router ID is 172.30.3.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+r i0.0.0.0          172.30.3.2               0    100      0 i
+r>i                 172.30.3.1               0    100      0 i
+* i2.179.52.0/24    172.30.3.2               0    100      0 i
+*>i                 172.30.3.1               0    100      0 i
+*> 2.179.52.2/32    192.168.31.2             0         32768 i
+leaf-2#sho ip os da
+
+            OSPF Router with ID (0.0.3.3) (Process ID 1)
+
+		Router Link States (Area 3)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+0.0.3.1         0.0.3.1         165         0x80000005 0x009F3D 4
+0.0.3.2         0.0.3.2         197         0x80000006 0x009438 4
+0.0.3.3         0.0.3.3         119         0x80000005 0x0006B8 3
+0.0.3.4         0.0.3.4         105         0x80000005 0x005E49 3
+0.0.3.5         0.0.3.5         148         0x80000005 0x005943 3
+
+		Summary Net Link States (Area 3)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+0.0.0.0         0.0.3.1         165         0x80000004 0x0090A6
+0.0.0.0         0.0.3.2         197         0x80000004 0x008AAB
+leaf-2#
+```
