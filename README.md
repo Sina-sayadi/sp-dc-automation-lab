@@ -103,17 +103,18 @@ Confederation Identifier:
 64400
 
 Member ASs:
-
-Member AS	-- Components
+```
+Member AS   Components
 
 65501 	Edge-1, Edge-2
 
 65502 	Backbone-1, Backbone-2, IXP, Spine-1, Spine-2, Leaf-1, Leaf-2, Leaf-3
 
 65503 	Broadband-1, Broadband-2, Site-1, POP-Site-1
+```
 
 The routing hierarchy is designed as:
-
+```
 AS65503
 
       │
@@ -123,7 +124,7 @@ AS65502
       │
       ▼
 AS65501
-
+```
 ⸻
 
 Core Routing Design
