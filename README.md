@@ -207,7 +207,7 @@ Customer-facing POP routers assign private IP addressing.
 Since CGNAT is not implemented in this lab, traditional NAT is configured on Broadband routers before traffic exits toward the Internet.
 
 Traffic follows this path:
-
+```
 Customer
 
 ↓
@@ -233,7 +233,7 @@ Otherwise Edge Routers
 ↓
 
 Internet
-
+```
 ⸻
 
 Data Center
@@ -248,7 +248,7 @@ These clients are independent from the Service Provider infrastructure and exist
 
 Public routes are advertised toward the DMVPN network to validate end-to-end connectivity.
 Traffic follows this path:
-
+```
 Customer
 
 ↓
@@ -274,8 +274,7 @@ Otherwise Edge Routers
 ↓
 
 Internet
-
-
+```
 ⸻
 
 Enterprise Network
