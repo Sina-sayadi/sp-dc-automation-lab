@@ -1,4 +1,18 @@
 ```
+edge-1#sho ip bgp 
+BGP table version is 7, local router ID is 172.30.1.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*  0.0.0.0          192.168.2.1                         3000 64300 i
+*>                  192.168.3.2                         4000 64200 i
+* i2.179.52.0/24    172.30.1.2               0    150   1000 (65502) i
+*>                  172.30.0.1               0    150   3000 (65502) i
+* i185.201.51.0/24  172.30.1.2               0    100   1000 (65502 65503 65503 65503) i
+*>                  172.30.0.2               0    100   3000 (65502 65503 65503 65503) i
+
 edge-1#sho ip ospf database 
 
             OSPF Router with ID (0.0.1.1) (Process ID 1)
