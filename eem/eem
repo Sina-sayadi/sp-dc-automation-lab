@@ -1,0 +1,18 @@
+##track 10 interface Ethernet1/2 line-protocol
+
+event manager applet BGP-FAILOVER-DOWN 
+ event track 10 state down
+ action 1.0 cli command "enable"
+ action 2.0 cli command "conf t"
+ action 3.0 cli command "router bgp 65502"
+ action 4.0 cli command "neighbor 172.30.0.2 shutdown"
+ action 5.0 cli command "end"
+ action 6.0 syslog msg "Interface Ethernet1/2 down -> IBGP neighbor shutdown"
+event manager applet BGP-FAILOVER-UP 
+ event track 10 state up
+ action 1.0 cli command "enable"
+ action 2.0 cli command "conf t"
+ action 3.0 cli command "router bgp 65502"
+ action 4.0 cli command "no neighbor 172.30.0.2 shutdown"
+ action 5.0 cli command "end"
+ action 6.0 syslog msg "Interface Ethernet1/2 up -> IBGP neighbor enabled"
