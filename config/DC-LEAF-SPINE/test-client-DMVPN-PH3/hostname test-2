@@ -1,0 +1,330 @@
+Building configuration...
+
+Current configuration : 3976 bytes
+!
+! Last configuration change at 19:38:50 UTC Tue Jun 30 2026
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname test-2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name sina.local
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+username sina privilege 15 secret 5 $1$PvrR$nnxU8Rlpfh2ViIEWceDPY.
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+crypto isakmp policy 10
+ encr aes 256
+ authentication pre-share
+ group 14
+crypto isakmp key DMVPN-KEY address 0.0.0.0 0.0.0.0
+!
+!
+crypto ipsec transform-set DMVPN-TS esp-aes 256 esp-sha-hmac 
+ mode transport
+!
+crypto ipsec profile DMVPN-PROFILE
+ set transform-set DMVPN-TS 
+!
+!
+!
+!
+!
+!
+!
+interface Loopback100
+ ip address 2.179.52.2 255.255.255.255
+ !
+!
+interface Tunnel10
+ ip address 10.10.10.2 255.255.255.0
+ no ip redirects
+ ip mtu 1400
+ ip nhrp authentication DMVPN
+ ip nhrp map 10.10.10.1 2.179.52.1
+ ip nhrp map multicast 2.179.52.1
+ ip nhrp network-id 100
+ ip nhrp nhs 10.10.10.1
+ ip nhrp shortcut
+ ip tcp adjust-mss 1360
+ tunnel source Loopback100
+ tunnel mode gre multipoint
+ tunnel key 100
+ tunnel protection ipsec profile DMVPN-PROFILE
+ !
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/1
+ ip address 192.168.31.2 255.255.255.252
+ duplex half
+ !
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/1
+ ip address dhcp
+ duplex half
+ !
+!
+interface Ethernet4/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 192.168.31.1
+!
+no cdp log mismatch duplex
+!
+!
+!
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+line vty 5 15
+ login local
+!
+end
