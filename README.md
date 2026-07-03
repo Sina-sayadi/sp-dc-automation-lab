@@ -241,6 +241,34 @@ DMVPN Phase 3 is deployed between these clients to demonstrate overlay VPN techn
 These clients are independent from the Service Provider infrastructure and exist solely for testing DMVPN functionality.
 
 Public routes are advertised toward the DMVPN network to validate end-to-end connectivity.
+Traffic follows this path:
+
+Customer
+
+↓
+
+leaf
+
+↓
+
+spine
+
+↓
+
+Core
+
+↓
+
+IXP (if route exists)
+
+↓
+
+Otherwise Edge Routers
+
+↓
+
+Internet
+
 
 ⸻
 
