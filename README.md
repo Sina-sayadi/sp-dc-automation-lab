@@ -1,70 +1,10 @@
-# Service Provider & Data Center Simulation with Automation
-
-A comprehensive network lab simulating a real-world Service Provider environment, including a Leaf-Spine Data Center, advanced routing, and automation.
-
-![Network Topology](diagrams/topology.png)
-
-## Project Overview
-
-This project demonstrates a full end-to-end network design covering:
-- Service Provider core and edge
-- Modern Leaf-Spine Data Center
-- Enterprise customer network
-
-## Key Technologies & Features
-
-### Routing Design
-- **Underlay**: OSPF with **all area types** (Standard, Stub, Totally Stubby, NSSA, Totally NSSA)
-- **Overlay**: BGP + DMVPN Phase 3
-- **BGP Advanced Policies**:
-  - Confederation
-  - Local Preference
-  - Weight
-  - Origin Prepend
-  - AS-Path manipulation
-
-### Data Center
-- Leaf-Spine topology
-- DMVPN Phase 3 on test clients
-
-### Service Provider
-- Core, Edge, and Broadband simulation
-- Internet + IXP peering
-- NAT implementation
-
-### Enterprise Network
-- HSRP for redundancy
-- STP (Spanning Tree)
-- DHCP Snooping
-- Dynamic ARP Inspection (DAI)
-
-### Automation (DevNet)
-- **Python Backup System**:
-  - DHCP IP assignment on management interface
-  - Automated config backup using Python + Netmiko
-- **EEM (Embedded Event Manager)**:
-  - Monitors interface status on Core routers
-  - Automatic reaction when a port goes down (BGP session management)
-
-## Repository Structure
-- `/diagrams` → Network topology
-- `/configs` → Router configurations
-- `/scripts` → Python automation scripts
-- `/eem` → EEM applets
-
-## Technologies
-Cisco IOS, OSPF, BGP, DMVPN, Python (Netmiko), EEM, SSH
-18”}
-
-Service Provider & Data Center Network Simulation with DevNet Automation
+#Service Provider & Data Center Network Simulation with DevNet Automation
 
 A production-style network simulation that combines a Service Provider core, a modern Leaf-Spine Data Center, Enterprise services, and network automation within a single integrated topology.
 
 The objective of this project is to demonstrate routing design, traffic engineering, redundancy, enterprise security, and network automation using Cisco technologies.
 
-⸻
-
-Network Architecture
+##Network Architecture
 
 The lab consists of four major components:
 
@@ -75,8 +15,21 @@ The lab consists of four major components:
 
 The Service Provider provides Internet connectivity, IXP peering, and Broadband services while the Data Center hosts internal services connected through a Leaf-Spine architecture.
 
-⸻
 
+![Network Topology](diagrams/topology.png)
+
+⸻
+## Project Overview
+
+This project demonstrates a full end-to-end network design covering:
+- Service Provider core and edge
+- Modern Leaf-Spine Data Center
+- Enterprise customer network
+
+⸻
+## Key Technologies & Features
+
+### Routing Design
 OSPF Underlay Design
 
 OSPF is deployed as the underlay routing protocol and is divided into multiple areas to simulate a scalable production network.
@@ -306,23 +259,23 @@ The following Layer 2 and gateway technologies are implemented:
 
 This section demonstrates common enterprise security and redundancy mechanisms.
 
-⸻
-
-Automation
-
-The lab also includes network automation components.
-
-Implemented features include:
-
-* Python configuration backup
-* Netmiko automation
-* Dynamic management IP assignment
-* Cisco EEM
-* Automated operational tasks
+### Automation (DevNet)
+- **Python Backup System**:
+  - DHCP IP assignment on management interface
+  - Automated config backup using Python + Netmiko
+- **EEM (Embedded Event Manager)**:
+  - Monitors interface status on Core routers
+  - Automatic reaction when a port goes down (BGP session management)
 
 ⸻
-
-Technologies
+## Repository Structure
+- `/diagrams` → Network topology
+- `/configs` → Router configurations
+- `/scripts` → Python automation scripts
+- `/eem` → EEM applets
+  
+⸻
+## Technologies
 
 * Cisco IOS
 * OSPF
@@ -342,5 +295,10 @@ Technologies
 * Python
 * Netmiko
 * Cisco EEM
+* SSH
+
+
+
+
 
 
