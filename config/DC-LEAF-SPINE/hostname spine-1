@@ -1,0 +1,341 @@
+Building configuration...
+
+Current configuration : 4586 bytes
+!
+! Last configuration change at 19:46:22 UTC Tue Jun 30 2026
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname spine-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name sina.local
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+username sina privilege 15 secret 5 $1$kmoR$hkeA6QW7mGiu0Z7nUc.0.0
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+interface Loopback100
+ ip address 172.30.3.1 255.255.255.255
+ ip ospf network point-to-point
+ ip ospf 1 area 3
+ !
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/1
+ ip address 192.168.1.74 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 3
+ duplex half
+ !
+!
+interface Ethernet1/2
+ ip address 192.168.1.70 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 3
+ duplex half
+ !
+!
+interface Ethernet1/3
+ ip address 192.168.1.78 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 3
+ duplex half
+ !
+!
+interface Ethernet1/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/1
+ ip address 192.168.1.58 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 0
+ duplex half
+ !
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/1
+ ip address dhcp
+ duplex half
+ !
+!
+interface Ethernet4/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+router ospf 1
+ router-id 0.0.3.1
+ log-adjacency-changes
+ area 3 stub no-summary
+!
+router bgp 65502
+ no synchronization
+ bgp log-neighbor-changes
+ bgp confederation identifier 64400
+ bgp confederation peers 65501 65503 
+ aggregate-address 2.179.52.0 255.255.255.0
+ neighbor IBGP-DC peer-group
+ neighbor IBGP-DC remote-as 65502
+ neighbor IBGP-DC password P@ssw0rd
+ neighbor IBGP-DC update-source Loopback100
+ neighbor IBGP-DC default-originate
+ neighbor UP-TO-CORE peer-group
+ neighbor UP-TO-CORE remote-as 65502
+ neighbor UP-TO-CORE password P@ssw0rd
+ neighbor UP-TO-CORE update-source Loopback100
+ neighbor UP-TO-CORE next-hop-self
+ neighbor UP-TO-CORE route-map SET-LP out
+ neighbor 172.30.0.1 peer-group UP-TO-CORE
+ neighbor 172.30.3.3 peer-group IBGP-DC
+ neighbor 172.30.3.4 peer-group IBGP-DC
+ neighbor 172.30.3.5 peer-group IBGP-DC
+ no auto-summary
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+no cdp log mismatch duplex
+!
+!
+!
+!
+route-map SET-LP permit 10
+ set local-preference 150
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+line vty 5 15
+ login local
+!
+end
