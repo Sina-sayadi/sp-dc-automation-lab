@@ -18,7 +18,7 @@ The Service Provider provides Internet connectivity, IXP peering, and Broadband 
 
 ![Network Topology](diagrams/topology.png)
 
-⸻
+
 ## Project Overview
 
 This project demonstrates a full end-to-end network design covering:
@@ -26,7 +26,7 @@ This project demonstrates a full end-to-end network design covering:
 - Modern Leaf-Spine Data Center
 - Enterprise customer network
 
-⸻
+
 ## Key Technologies & Features
 
 ### Routing Design
@@ -45,7 +45,7 @@ These routers interconnect every major section of the infrastructure, including:
 * Edge Routers
 * IXP
 
-⸻
+
 
 Area 1 – Edge
 
@@ -53,7 +53,6 @@ Edge-1 and Edge-2 are located in Area 1.
 
 This area connects the Service Provider to multiple upstream Internet providers.
 
-⸻
 
 Area 2 – Broadband
 
@@ -65,7 +64,7 @@ The objective is to inject only a default route toward customer-facing devices w
 
 Broadband-1 and Broadband-2 also operate as ABRs between Area 0 and Area 2.
 
-⸻
+
 
 Area 3 – Data Center
 
@@ -84,13 +83,13 @@ This significantly reduces the routing table inside the Data Center.
 
 Spine-1 and Spine-2 also operate as ABRs between Area 0 and Area 3.
 
-⸻
+
 
 Area 4 – IXP
 
 The IXP Core is deployed inside Area 4 as a normal OSPF area.
 
-⸻
+
 
 BGP Overlay Design
 
@@ -125,7 +124,7 @@ AS65502
       ▼
 AS65501
 ```
-⸻
+
 
 Core Routing Design
 
@@ -151,7 +150,6 @@ Instead, they maintain only:
 
 This keeps the routing table compact while allowing full connectivity.
 
-⸻
 
 BGP Traffic Engineering
 
@@ -161,13 +159,13 @@ Route Reflector
 
 Backbone routers operate as Route Reflectors to eliminate the need for a full iBGP mesh and simplify route distribution across the Service Provider core.
 
-⸻
+
 
 IXP
 
 The IXP peers with external networks using maximum-paths, allowing load balancing across multiple equal-cost paths.
 
-⸻
+
 
 Edge Policy
 
@@ -182,7 +180,7 @@ The following BGP attributes are used:
 
 These policies determine the preferred outbound Internet path while also influencing inbound traffic,outbound trafcic from upstream providers.
 
-⸻
+
 
 Broadband Policy
 
@@ -196,7 +194,6 @@ Local Preference defines the preferred Broadband router for outbound traffic.
 
 Weight and AS-Path Prepending influence send and return traffic from upstream networks.
 
-⸻
 
 Broadband Services
 
@@ -234,7 +231,7 @@ Otherwise Edge Routers
 
 Internet
 ```
-⸻
+
 
 Data Center
 
@@ -275,7 +272,7 @@ Otherwise Edge Routers
 
 Internet
 ```
-⸻
+
 
 Enterprise Network
 
@@ -300,7 +297,7 @@ This section demonstrates common enterprise security and redundancy mechanisms.
   - Monitors interface status on Core routers
   - Automatic reaction when a port goes down (BGP session management)
 
-⸻
+
 ## Repository Structure
 - `/diagrams` → Network topology
 - `/configs` → Router configurations
@@ -308,7 +305,7 @@ This section demonstrates common enterprise security and redundancy mechanisms.
 - `/eem` → EEM applets
 - `/docs` → documents(show bgp , show ip ospf database)
   
-⸻
+
 ## Technologies
 
 * Cisco IOS
