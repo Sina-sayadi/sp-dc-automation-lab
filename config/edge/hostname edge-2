@@ -1,0 +1,379 @@
+Building configuration...
+
+Current configuration : 5796 bytes
+!
+! Last configuration change at 19:53:36 UTC Tue Jun 30 2026
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname edge-2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name sina.local
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+username sina privilege 15 secret 5 $1$7F/9$/M8iwx287Ez9Awi.j2fdc1
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+interface Loopback100
+ ip address 172.30.1.2 255.255.255.255
+ ip ospf network point-to-point
+ ip ospf 1 area 1
+ !
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/2
+ ip address 192.168.1.42 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 1
+ duplex half
+ !
+!
+interface Ethernet1/3
+ ip address 192.168.1.34 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 1
+ duplex half
+ !
+!
+interface Ethernet1/4
+ ip address 192.168.1.14 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 1
+ duplex half
+ !
+!
+interface Ethernet1/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/1
+ ip address 192.168.3.5 255.255.255.252
+ duplex half
+ !
+!
+interface Ethernet2/2
+ ip address 192.168.2.6 255.255.255.252
+ duplex half
+ !
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/1
+ ip address dhcp
+ duplex half
+ !
+!
+interface Ethernet4/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+router ospf 1
+ router-id 0.0.1.2
+ log-adjacency-changes
+!
+router bgp 65501
+ bgp log-neighbor-changes
+ bgp confederation identifier 64400
+ bgp confederation peers 65502 65503 
+ neighbor IBGP peer-group
+ neighbor IBGP remote-as 65501
+ neighbor IBGP description IBGP-PEER
+ neighbor IBGP password P@ssw0rd
+ neighbor IBGP update-source Loopback100
+ neighbor CORE peer-group
+ neighbor CORE remote-as 65502
+ neighbor CORE description CORE-PEER
+ neighbor CORE ebgp-multihop 2
+ neighbor CORE password P@ssw0rd
+ neighbor CORE update-source Loopback100
+ neighbor 172.30.0.1 peer-group CORE
+ neighbor 172.30.0.2 peer-group CORE
+ neighbor 172.30.1.1 peer-group IBGP
+ neighbor 192.168.2.5 remote-as 64300
+ neighbor 192.168.2.5 password P@ssw0rd123
+ neighbor 192.168.3.6 remote-as 64200
+ neighbor 192.168.3.6 password P@ssw0rd123
+ !
+ address-family ipv4
+  no synchronization
+  neighbor IBGP next-hop-self
+  neighbor IBGP prefix-list NO-DEFAULT out
+  neighbor CORE next-hop-self
+  neighbor CORE prefix-list DEFAULT-ONLY out
+  neighbor 172.30.0.1 activate
+  neighbor 172.30.0.1 weight 3000
+  neighbor 172.30.0.2 activate
+  neighbor 172.30.0.2 weight 3000
+  neighbor 172.30.1.1 activate
+  neighbor 172.30.1.1 weight 1000
+  neighbor 192.168.2.5 activate
+  neighbor 192.168.2.5 weight 3000
+  neighbor 192.168.2.5 prefix-list DEFAULT-ONLY in
+  neighbor 192.168.2.5 route-map BGP-OUT-64300 out
+  neighbor 192.168.3.6 activate
+  neighbor 192.168.3.6 weight 4000
+  neighbor 192.168.3.6 prefix-list DEFAULT-ONLY in
+  neighbor 192.168.3.6 route-map BGP-OUT-64200 out
+  no auto-summary
+ exit-address-family
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+ip access-list standard BGP-OUT-64200
+ permit 185.201.51.0 0.0.0.255
+ permit 2.179.52.0 0.0.0.255
+ deny   any
+ip access-list standard BGP-OUT-64300
+ permit 185.201.51.0 0.0.0.255
+ permit 2.179.52.0 0.0.0.255
+ deny   any
+!
+!
+ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+!
+ip prefix-list NO-DEFAULT seq 5 deny 0.0.0.0/0
+ip prefix-list NO-DEFAULT seq 10 permit 0.0.0.0/0 le 32
+no cdp log mismatch duplex
+!
+!
+!
+!
+route-map BGP-OUT-64300 permit 10
+ match ip address BGP-OUT-64300
+ set as-path prepend 64400 64400 64400
+!
+route-map BGP-OUT-64200 permit 10
+ match ip address BGP-OUT-64200
+ set origin igp
+ set as-path prepend 64400 64400
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+line vty 5 15
+ login local
+!
+end
