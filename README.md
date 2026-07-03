@@ -2,7 +2,7 @@
 
 A comprehensive network lab simulating a real-world Service Provider environment, including a Leaf-Spine Data Center, advanced routing, and automation.
 
-![Network Topology](diagrams/topology.png)
+![Network Topology](diagrams/topolog.png)
 
 ## Project Overview
 
