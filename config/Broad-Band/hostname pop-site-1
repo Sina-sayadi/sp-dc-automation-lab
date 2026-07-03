@@ -1,0 +1,322 @@
+Building configuration...
+
+Current configuration : 3913 bytes
+!
+! Last configuration change at 19:47:08 UTC Tue Jun 30 2026
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname pop-site-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name sina.local
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+username sina privilege 15 secret 5 $1$crKA$JX38xuilOQ6wMynGpyshG1
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+interface Loopback100
+ ip address 172.30.2.4 255.255.255.255
+ ip ospf network point-to-point
+ ip ospf 1 area 2
+ !
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/1
+ ip address 192.168.1.53 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf prefix-suppression
+ ip ospf 1 area 2
+ duplex half
+ !
+!
+interface Ethernet1/2
+ ip address 172.16.1.1 255.255.255.252
+ duplex half
+ !
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet1/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet2/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet3/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/1
+ ip address dhcp
+ duplex half
+ !
+!
+interface Ethernet4/2
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/3
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/4
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/5
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/6
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface Ethernet4/7
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+router ospf 1
+ router-id 0.0.2.2
+ log-adjacency-changes
+ area 2 nssa no-summary
+!
+router bgp 65503
+ no synchronization
+ bgp log-neighbor-changes
+ bgp confederation identifier 64400
+ bgp confederation peers 65501 65502 
+ network 172.16.1.0 mask 255.255.255.252
+ neighbor TO-SITE peer-group
+ neighbor TO-SITE remote-as 65503
+ neighbor TO-SITE password P@ssw0rd
+ neighbor TO-SITE update-source Loopback100
+ neighbor TO-SITE route-reflector-client
+ neighbor 172.30.2.1 peer-group TO-SITE
+ no auto-summary
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+no cdp log mismatch duplex
+!
+!
+!
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+line vty 5 15
+ login local
+!
+end
