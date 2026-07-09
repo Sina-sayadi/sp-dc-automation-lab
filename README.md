@@ -303,7 +303,7 @@ This section demonstrates common enterprise security and redundancy mechanisms.
 - `/configs` → Router configurations
 - `/scripts` → Python automation scripts
 - `/eem` → EEM applets
-- `/docs` → documents(show bgp , show ip ospf database)
+- `/docs` → Real command outputs(show bgp , show ip ospf database)
   
 
 ## Technologies
