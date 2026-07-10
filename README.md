@@ -335,5 +335,8 @@ This section demonstrates common enterprise security and redundancy mechanisms.
 
 ---
 
-**Made by Sina Sayadi**  
-Network Engineering & SDN Lab
+## Author
+
+**Sina Sayadi**
+
+Network Engineer | Cisco | SDN | Network Automation
