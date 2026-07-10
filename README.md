@@ -298,12 +298,6 @@ This section demonstrates common enterprise security and redundancy mechanisms.
   - Automatic reaction when a port goes down (BGP session management)
 
 
----
-
-**Made by Sina Sayadi**  
-Network Engineering & SDN Lab
-
-
 ## Repository Structure
 - `/diagrams` → Network topology
 - `/configs` → Router configurations
@@ -339,3 +333,7 @@ Network Engineering & SDN Lab
 
 
 
+---
+
+**Made by Sina Sayadi**  
+Network Engineering & SDN Lab
